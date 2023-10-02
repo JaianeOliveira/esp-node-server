@@ -1,15 +1,24 @@
-#include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <DHT.h>
+#include <WiFi.h>
+
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 
 #define DHTPIN 4
 #define DHTTYPE DHT11
 
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP);
+
+String formattedDate;
+String timeStamp;
+
 DHT dht(DHTPIN, DHTTYPE);
-const char* ssid = "your wifi ssid";
-const char* password = "your wifi password";
-const char* apiEndpoint = "your api endpoint";
+String ssid = "Privado";
+String password = "mementomori";
+String apiEndpoint = "http://10.0.0.146:5000/data";
 
 
 void setup() {
@@ -24,6 +33,10 @@ void setup() {
     Serial.println("Conectando ao Wi-Fi...");
   }
   Serial.println("Conectado ao Wi-Fi");
+  Serial.println(WiFi.localIP());
+
+  timeClient.begin();
+  timeClient.setTimeOffset(-10800);
   
 }
 
@@ -45,12 +58,21 @@ void loop() {
     return;
   }
 
+  while(!timeClient.update()){
+    timeClient.forceUpdate();
+  }
+
+  formattedDate = timeClient.getFormattedDate();
+  int splitT = formattedDate.indexOf("T");
+  timeStamp = formattedDate.substring(splitT+1, formattedDate.length()-1);
+
   HTTPClient http;
 
   // Crie um objeto JSON para enviar os dados
   StaticJsonDocument<200> jsonDocument;
   jsonDocument["temperature"] = t;
   jsonDocument["humidity"] = h;
+  jsonDocument["time"] = timeStamp;
 
   // Serializar o JSON para uma string
   String jsonString;

@@ -65,12 +65,12 @@ async function handleConnect() {
 		dataChart.data.datasets[0].data.push(temperature.c);
 		dataChart.data.datasets[1].data.push(humidity);
 
-		dataChart.update();
+		// dataChart.update();
 
-		if (dataChart.data.labels.length > 39) {
-			dataChart.data.labels.shift();
-			dataChart.data.datasets.forEach((dataset) => dataset.data.shift());
-		}
+		// if (dataChart.data.labels.length > 39) {
+		// 	dataChart.data.labels.shift();
+		// 	dataChart.data.datasets.forEach((dataset) => dataset.data.shift());
+		// }
 		dataChart.update();
 	});
 }
