@@ -2,9 +2,7 @@ import { io } from 'https://cdn.socket.io/4.4.1/socket.io.esm.min.js';
 
 const socket = io();
 
-let temperatureDataHistory = [];
-let humidityDataHistory = [];
-let timePointsHistory = [];
+let count = 0;
 
 const $tempC = document.querySelector('.temp-c');
 const $tempF = document.querySelector('.temp-f');
@@ -21,25 +19,31 @@ let dataChart = new Chart(ctx, {
 			{
 				label: 'Temperatura (°C)',
 				data: [],
-				borderColor: '#06b6d4',
-				backgroundColor: '#06b6d4',
+				borderColor: '#38bdf8',
+				backgroundColor: '#38bdf8',
 			},
 			{
 				label: 'Umidade (%)',
 				data: [],
-				borderColor: '#2563eb',
-				backgroundColor: '#2563eb',
+				borderColor: '#2dd4bf',
+				backgroundColor: '#2dd4bf',
 			},
 		],
 	},
 	options: {
 		responsive: true,
+		aspectRatio: 21 / 9,
 		scales: {
 			x: {
 				display: true,
 			},
 			y: {
 				display: true,
+			},
+		},
+		plugins: {
+			legend: {
+				position: 'bottom',
 			},
 		},
 	},
@@ -55,13 +59,15 @@ async function handleConnect() {
 
 		$humidity.innerHTML = humidity;
 
-		dataChart.data.labels.push(dataChart.data.labels.length + 1);
+		count += 1;
+
+		dataChart.data.labels.push(count);
 		dataChart.data.datasets[0].data.push(temperature.c);
 		dataChart.data.datasets[1].data.push(humidity);
 
 		dataChart.update();
 
-		if (dataChart.data.labels.length > 29) {
+		if (dataChart.data.labels.length > 39) {
 			dataChart.data.labels.shift();
 			dataChart.data.datasets.forEach((dataset) => dataset.data.shift());
 		}

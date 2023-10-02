@@ -128,24 +128,81 @@ h3 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
+	margin-bottom: 8rem;
+	text-align: center;
+}
+.display-data p,
+h2,
+h3 {
+	text-align: center;
 }
 
+.display-data p {
+	font-size: 1.4rem;
+	font-weight: 300;
+}
 .display-data .temps {
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
+	align-items: flex-end;
+	justify-content: center;
 }
 
 .display-data .temp {
 }
 
+.display-data .temp h2 {
+	font-size: 4rem;
+	font-weight: 900;
+}
+
+.display-data .temp .temp-c {
+	font-size: 8rem;
+}
+
+.display-data .temp h3 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	opacity: 0.8;
+}
+
+.display-data .temp .temp-k,
+.temp-f {
+	font-size: 2rem;
+}
+
+@media (max-width: 1024px) {
+	.display-data .temp h2 {
+		font-size: 3rem;
+		font-weight: 900;
+	}
+
+	.display-data .temp .temp-c {
+		font-size: 4rem;
+	}
+	.display-data .temp h3 {
+		font-size: 1rem;
+	}
+
+	.display-data .temp .temp-k,
+	.temp-f {
+		font-size: 1.5rem;
+	}
+
+	.display-data p {
+		font-size: 1.1rem;
+		font-weight: 300;
+	}
+}
+
 .chart-container {
 	width: 100%;
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: center;
 }
 
 #chart {
-	width: 70%;
+	width: 100%;
 	max-height: 40vh;
 }
