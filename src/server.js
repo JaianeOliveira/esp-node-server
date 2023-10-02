@@ -37,11 +37,12 @@ app.get('/', (req, res) => {
 
 app.post('/data', (req, res) => {
 	const body = req.body;
-	const { temperature, humidity } = body;
-
+	const { temperature, humidity, moment } = body;
+	console.log(moment);
 	io.emit(
 		'send_data',
 		JSON.stringify({
+			moment: moment,
 			temperature: {
 				k: celsiusToKelvin(temperature),
 				c: temperature,

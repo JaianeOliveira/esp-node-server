@@ -52,7 +52,7 @@ let dataChart = new Chart(ctx, {
 async function handleConnect() {
 	const socketConnection = await socket.connect('http://localhost:5000');
 	socketConnection.on('send_data', (data) => {
-		const { temperature, humidity } = JSON.parse(data);
+		const { temperature, humidity, moment } = JSON.parse(data);
 		$tempC.innerHTML = temperature.c;
 		$tempF.innerHTML = temperature.f;
 		$tempK.innerHTML = temperature.k;
@@ -61,16 +61,10 @@ async function handleConnect() {
 
 		count += 1;
 
-		dataChart.data.labels.push(count);
+		dataChart.data.labels.push(new Date(moment).toLocaleTimeString());
 		dataChart.data.datasets[0].data.push(temperature.c);
 		dataChart.data.datasets[1].data.push(humidity);
 
-		// dataChart.update();
-
-		// if (dataChart.data.labels.length > 39) {
-		// 	dataChart.data.labels.shift();
-		// 	dataChart.data.datasets.forEach((dataset) => dataset.data.shift());
-		// }
 		dataChart.update();
 	});
 }

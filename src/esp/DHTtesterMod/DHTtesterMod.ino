@@ -36,7 +36,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   timeClient.begin();
-  timeClient.setTimeOffset(-10800);
+  timeClient.setTimeOffset(0);
   
 }
 
@@ -63,8 +63,6 @@ void loop() {
   }
 
   formattedDate = timeClient.getFormattedDate();
-  int splitT = formattedDate.indexOf("T");
-  timeStamp = formattedDate.substring(splitT+1, formattedDate.length()-1);
 
   HTTPClient http;
 
@@ -72,7 +70,7 @@ void loop() {
   StaticJsonDocument<200> jsonDocument;
   jsonDocument["temperature"] = t;
   jsonDocument["humidity"] = h;
-  jsonDocument["time"] = timeStamp;
+  jsonDocument["moment"] = formattedDate;
 
   // Serializar o JSON para uma string
   String jsonString;
