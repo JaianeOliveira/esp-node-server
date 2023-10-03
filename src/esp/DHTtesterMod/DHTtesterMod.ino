@@ -18,7 +18,7 @@ String timeStamp;
 DHT dht(DHTPIN, DHTTYPE);
 String ssid = "{wifi name}";
 String password = "{wifi password}";
-String apiEndpoint = "http://{ip}:5000/data";
+String apiEndpoint = "http://{localIP}:5000/data";
 
 
 void setup() {
@@ -63,7 +63,6 @@ void loop() {
   }
 
   formattedDate = timeClient.getFormattedDate();
-
   HTTPClient http;
 
   // Crie um objeto JSON para enviar os dados
