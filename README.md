@@ -1,3 +1,8 @@
+# Sensor de temperatura e humidade com placa ESP32
+![Gerador de senhas (1)](https://github.com/JaianeOliveira/esp-node-server/assets/82323559/4ddc97aa-b1b8-47c1-bf75-3eb41ce80093)
+
+![WhatsApp Image 2023-10-03 at 10 27 11](https://github.com/JaianeOliveira/esp-node-server/assets/82323559/1c1f28cf-45ac-4d5f-9410-8b67012dd948)
+
 ## Descrição do projeto
 
 - A atividade consiste em criar uma estação meteorológica usando o ESP32 que colete dados de temperatura e umidade, exibindo-os em uma página WEB.
