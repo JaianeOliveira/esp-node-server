@@ -16,9 +16,9 @@ String formattedDate;
 String timeStamp;
 
 DHT dht(DHTPIN, DHTTYPE);
-String ssid = "Privado";
-String password = "mementomori";
-String apiEndpoint = "http://10.0.0.146:5000/data";
+String ssid = "{wifi name}";
+String password = "{wifi password}";
+String apiEndpoint = "http://{ip}:5000/data";
 
 
 void setup() {
